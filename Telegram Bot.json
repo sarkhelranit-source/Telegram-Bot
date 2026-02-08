@@ -325,7 +325,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return items.map(item => {\n  // update .output.message if present\n  if (item.json && item.json.output && item.json.output.message) {\n    item.json.output.message = item.json.output.message.replace(/[`*_]/g, '');\n  }\n  return item;\n});\n"
+        "jsCode": "return items.map(item => {\n  // Extract only the message and replace the entire output with just the message string\n  if (item.json && item.json.output && item.json.output.message) {\n    item.json.output = item.json.output.message.replace(/[`*_]/g, '');\n  }\n  return item;\n});\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
