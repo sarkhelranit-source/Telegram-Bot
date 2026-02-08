@@ -1,5 +1,4 @@
 {
-  "name": "Telegram Bot",
   "nodes": [
     {
       "parameters": {
@@ -11,8 +10,8 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.2,
       "position": [
-        -816,
-        -64
+        -688,
+        -320
       ],
       "id": "01a2ab71-e7f1-4431-9067-76880c10ab4f",
       "name": "Telegram Trigger",
@@ -31,8 +30,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
       "typeVersion": 1.5,
       "position": [
-        -16,
-        144
+        -80,
+        -112
       ],
       "id": "8db60e46-a68d-46c8-a20a-04d7a02bc673",
       "name": "Memory",
@@ -46,7 +45,7 @@
     {
       "parameters": {
         "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
-        "text": "={{ $json.output.message }}",
+        "text": "={{ $json.output }}",
         "replyMarkup": "forceReply",
         "forceReply": {},
         "additionalFields": {
@@ -56,8 +55,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        752,
-        64
+        704,
+        -256
       ],
       "id": "fdd36d53-1abf-409f-9c40-5d31db88f639",
       "name": "Send a text message",
@@ -119,8 +118,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        352,
-        -96
+        272,
+        -352
       ],
       "id": "b53df7d4-cdb1-4864-95c3-09e46bc35d35",
       "name": "If1"
@@ -148,8 +147,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        336,
-        -304
+        256,
+        -560
       ],
       "id": "455880be-e76e-4867-8285-e090ab068527",
       "name": "Edit Fields"
@@ -167,7 +166,7 @@
             {
               "id": "b0715812-4527-40a9-aa7e-2786a4b73567",
               "name": "sessionId",
-              "value": "session_130833015",
+              "value": "=session_1235715",
               "type": "string"
             }
           ]
@@ -178,7 +177,7 @@
       "typeVersion": 3.4,
       "position": [
         -272,
-        -80
+        -336
       ],
       "id": "44728aa8-2f47-4ad0-9b75-11f88bc737d0",
       "name": "Edit Fields1"
@@ -198,8 +197,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        560,
-        -144
+        480,
+        -400
       ],
       "id": "09777fc7-75e4-4886-8157-a3d7110f0fdc",
       "name": "Send approval message",
@@ -216,13 +215,14 @@
     },
     {
       "parameters": {
+        "modelName": "models/gemini-2.5-pro-preview-tts",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -144,
-        112
+        -208,
+        -144
       ],
       "id": "951f98b1-96ea-4c56-853b-f6be0c390089",
       "name": "Fallback Brain",
@@ -272,8 +272,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -576,
-        48
+        -448,
+        -208
       ],
       "id": "16ab26f7-7fe7-478a-a86f-a21bcf83710d",
       "name": "If"
@@ -317,8 +317,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -576,
-        -144
+        -448,
+        -400
       ],
       "id": "f579d94f-a2da-4d11-8b0c-fdb71581a700",
       "name": "If2"
@@ -330,8 +330,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        560,
-        64
+        480,
+        -192
       ],
       "id": "7dd8003e-6720-4716-a9be-75cb8072c0f2",
       "name": "Format Output"
@@ -343,8 +343,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -288,
-        128
+        -336,
+        -112
       ],
       "id": "c6eb901d-da8f-4be7-acf0-91dfb745e46b",
       "name": "Primary Brain",
@@ -354,20 +354,6 @@
           "name": "Primary model"
         }
       }
-    },
-    {
-      "parameters": {
-        "jsonSchemaExample": "{\n    \"need_approval\": true,\n    \"message\": \"string\"\n}\n",
-        "autoFix": true
-      },
-      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-      "typeVersion": 1.3,
-      "position": [
-        256,
-        112
-      ],
-      "id": "28cd1304-1004-4c5a-afd3-278fb8f286e1",
-      "name": "Structured Output Parser"
     },
     {
       "parameters": {
@@ -405,8 +391,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        96,
-        128
+        48,
+        -96
       ],
       "id": "554bebc1-091a-427e-99e0-a6397becd99c",
       "name": "Oracle Server"
@@ -418,72 +404,11 @@
       "type": "n8n-nodes-base.dateTimeTool",
       "typeVersion": 2,
       "position": [
-        192,
-        224
+        176,
+        -128
       ],
       "id": "be793e0d-218a-47d5-b0d5-740b105a056e",
       "name": "Date & Time"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [
-        544,
-        256
-      ],
-      "id": "c53853e1-7480-4692-a43a-a87d03f3798b",
-      "name": "Fallback Brain1",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "Qg7awO5PbhgokA2u",
-          "name": "fallback model"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "endpointUrl": "http://mcp-github:8080/sse",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
-      "typeVersion": 1.1,
-      "position": [
-        -176,
-        496
-      ],
-      "id": "75dde9fb-a063-43b3-9e5c-9585b4b60b61",
-      "name": "GitHub MCP"
-    },
-    {
-      "parameters": {
-        "text": "Use the GitHub MCP client to complete the Task Given by the Manager",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.agentTool",
-      "typeVersion": 2.2,
-      "position": [
-        -288,
-        304
-      ],
-      "id": "3b4b82ea-5406-46c3-ac9f-893858d849d1",
-      "name": "GitHub Agent"
-    },
-    {
-      "parameters": {
-        "text": "Use the Notion MCP Client to complete the task given by Manager",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.agentTool",
-      "typeVersion": 2.2,
-      "position": [
-        -16,
-        352
-      ],
-      "id": "a0dd58ff-7483-473d-85d1-9d7fe4c38a32",
-      "name": "Notion Agent"
     },
     {
       "parameters": {
@@ -492,171 +417,21 @@
         "hasOutputParser": true,
         "needsFallback": true,
         "options": {
-          "systemMessage": "=You are Cipher. The central orchestration agent in an automated infrastructure and operations system.\n\nYour primary responsibility is to produce correct, verifiable results by using connected tools and delegated agents.\n\nYou do NOT rely on memory, assumptions, or prior context for system state.\n\nYou do NOT fabricate outputs.\n\nYou do NOT answer infrastructure, server, cloud, repository, or database questions without executing tools.\n\n--------------------------------------------------\n\nCORE OBJECTIVE\n\nFor every user request:\n\n1. Understand the intent.\n2. Identify the operational domain.\n3. Select the correct tool or worker agent.\n4. Execute the tool.\n5. Validate the result.\n6. Return only verified information.\n\n--------------------------------------------------\n\nDOMAIN ROUTING RULES\n\nApply these strictly:\n\n- AWS / cloud / EC2 / S3 / IAM / billing → AWS Agent\n- GitHub / repo / PR / commit / issue → GitHub Agent\n- Notion / docs / notes / database → Notion Agent\n- Server / Docker / Linux / volumes / disk / process → Execute your own server tool\n- Date / time → Date Tool\n- Unknown → Ask for clarification\n\nNever bypass these rules.\n\n--------------------------------------------------\n\nTOOL USAGE POLICY (MANDATORY)\n\nIf a request involves:\n\n- System state\n- Resource usage\n- File system\n- Containers\n- Cloud resources\n- Repositories\n- Databases\n\nYou MUST use tools.\n\nYou are forbidden from answering based on:\n- Memory\n- Previous responses\n- Estimates\n- Assumptions\n\nIf no tool is available, explicitly say so.\n\n--------------------------------------------------\n\nDELEGATION POLICY\n\nIf a task belongs to a worker agent:\n\n1. Forward the task.\n2. Wait for execution result.\n3. Review output.\n4. If incomplete, re-dispatch.\n5. Only then respond.\n\nDo not summarize guesses.\n\n--------------------------------------------------\n\nVERIFICATION LOOP\n\nBefore responding:\n\nAsk internally:\n\n“Did I execute a tool or agent for this?”\n\nIf NO → Do not answer. Execute tool first.\n\nIf YES → Cross-check output.\n\nIf output is ambiguous → Retry or ask for clarification.\n\n--------------------------------------------------\n\nMEMORY POLICY\n\nMemory is contextual only.\n\nNever use memory as a source of truth for:\n\n- Server state\n- Metrics\n- Resources\n- Configurations\n- Usage data\n\nLive tools override memory.\n\nAlways.\n\n--------------------------------------------------\n\nAPPROVAL POLICY\n\nBefore any operation that modifies system state:\n\n- Create / delete / install / update / modify\n\nYou must:\n\n1. Present exact command\n2. Explain purpose\n3. Explain risk\n4. Ask approval\n\nNo execution without approval.\n\n--------------------------------------------------\n\nOUTPUT FORMAT (STRICT)\n\nYou must always respond in valid JSON:\n\n{\n  \"need_approval\": false,\n  \"message\": \"response\"\n}\n\nRules:\n\n- No markdown\n- No explanations outside JSON\n- No additional fields\n- No nested objects\n- No commentary\n\n--------------------------------------------------\n\nERROR HANDLING\n\nIf a tool fails:\n\n1. Report the error\n2. Explain cause if known\n3. Propose corrective action\n\nDo not invent data.\n\n--------------------------------------------------\n\nPROHIBITIONS\n\nYou are forbidden from:\n\n- Roleplaying\n- Using fictional language\n- Pretending to have executed commands\n- Simulating outputs\n- Providing “example” data\n- Guessing system state\n- Answering without verification\n\nAccuracy > Politeness\nCorrectness > Style\nExecution > Conversation\n\n--------------------------------------------------\n\nDEFAULT BEHAVIOR\n\nWhen uncertain:\n\nAsk exactly one clarifying question.\n\nWhen blocked:\n\nExplain the blocking factor.\n\nWhen complete:\n\nReturn verified result.\n\n--------------------------------------------------\n"
+          "systemMessage": "=You are an operations assistant running inside an automated workflow.\n\nYour role is to interpret user requests and use available tools when needed.\n\nRules:\n\n1. Use tools when a request requires external data, system state, or execution.\n2. Do not invent results.\n3. If no suitable tool exists, say so clearly.\n4. Keep responses concise and factual.\n5. Do not include markdown formatting.\n6. Do not include code blocks unless explicitly requested.\n7. Do not output JSON unless asked.\n8. Do not explain internal reasoning.\n\nTool Usage:\n\n- Prefer tools over assumptions.\n- Wait for tool results before answering.\n- If a tool fails, report the error.\n\nBehavior:\n\n- If the request is ambiguous, ask one clarification question.\n- If approval is required, present the exact action and wait.\n\nYou are not allowed to roleplay or fabricate data.\nAccuracy and correctness are the priority.\n\nWhen responding, use this format:\n\nResponse:\n<your answer here>\n\nDo not add anything else.\n\n"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        -32,
-        -96
+        -96,
+        -352
       ],
       "id": "09d21dc4-f41a-45a8-b6a0-2048c41066d4",
       "name": "Manager Agent",
       "retryOnFail": false,
       "waitBetweenTries": 100
-    },
-    {
-      "parameters": {
-        "endpointUrl": "http://mcp-notion:8080/sse",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
-      "typeVersion": 1.1,
-      "position": [
-        224,
-        496
-      ],
-      "id": "a1730e84-f1ca-48a5-aa03-6502f8885571",
-      "name": "Notion MCP"
-    },
-    {
-      "parameters": {
-        "endpointUrl": "http://mcp-aws:8080/sse",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
-      "typeVersion": 1.1,
-      "position": [
-        -496,
-        464
-      ],
-      "id": "cb755367-7c3a-4028-ae74-cad9dd8581d9",
-      "name": "AWS MCP"
-    },
-    {
-      "parameters": {
-        "text": "Use the AWS MCP client to complete the task given by the manager. Use the AWS MCP tool attached with you.",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.agentTool",
-      "typeVersion": 2.2,
-      "position": [
-        -688,
-        288
-      ],
-      "id": "5f52c5a3-a615-43ca-a245-9b4b706f52cd",
-      "name": "AWS Agent"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [
-        -720,
-        448
-      ],
-      "id": "5fec8722-2f45-49e5-a61f-6202bd94c674",
-      "name": "AWS Brain",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "Qg7awO5PbhgokA2u",
-          "name": "fallback model"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "modelName": "models/gemini-2.5-pro",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [
-        -320,
-        464
-      ],
-      "id": "bb486e8f-104e-45e6-9fd8-8a67eb566b31",
-      "name": "Git Brain",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "yOdl5TYIitX10xic",
-          "name": "Primary model"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "modelName": "models/gemini-2.5-pro",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [
-        96,
-        496
-      ],
-      "id": "45c2069b-f757-497d-be57-7153305fd580",
-      "name": "Notion Brain",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "yOdl5TYIitX10xic",
-          "name": "Primary model"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [
-        400,
-        272
-      ],
-      "id": "bdd7c1af-662e-4507-b5ac-73ee8166daa6",
-      "name": "Parser Brain",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "yOdl5TYIitX10xic",
-          "name": "Primary model"
-        }
-      }
     }
   ],
-  "pinData": {
-    "Telegram Trigger": [
-      {
-        "json": {
-          "update_id": 329739733,
-          "message": {
-            "message_id": 1085,
-            "from": {
-              "id": 1931776955,
-              "is_bot": false,
-              "first_name": "Ranit",
-              "last_name": "Sarkhel",
-              "language_code": "en"
-            },
-            "chat": {
-              "id": 1931776955,
-              "first_name": "Ranit",
-              "last_name": "Sarkhel",
-              "type": "private"
-            },
-            "date": 1769530865,
-            "text": "Check if there's any unused docker volumes out there"
-          }
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ]
-  },
   "connections": {
     "Telegram Trigger": {
       "main": [
@@ -791,17 +566,6 @@
         ]
       ]
     },
-    "Structured Output Parser": {
-      "ai_outputParser": [
-        [
-          {
-            "node": "Manager Agent",
-            "type": "ai_outputParser",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Oracle Server": {
       "ai_tool": [
         [
@@ -824,44 +588,6 @@
         ]
       ]
     },
-    "Fallback Brain1": {
-      "ai_languageModel": [
-        []
-      ]
-    },
-    "GitHub MCP": {
-      "ai_tool": [
-        [
-          {
-            "node": "GitHub Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "GitHub Agent": {
-      "ai_tool": [
-        [
-          {
-            "node": "Manager Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Notion Agent": {
-      "ai_tool": [
-        [
-          {
-            "node": "Manager Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Manager Agent": {
       "main": [
         [
@@ -873,94 +599,11 @@
         ],
         []
       ]
-    },
-    "Notion MCP": {
-      "ai_tool": [
-        [
-          {
-            "node": "Notion Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AWS MCP": {
-      "ai_tool": [
-        [
-          {
-            "node": "AWS Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AWS Agent": {
-      "ai_tool": [
-        [
-          {
-            "node": "Manager Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AWS Brain": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AWS Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Git Brain": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "GitHub Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Notion Brain": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Notion Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Parser Brain": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Structured Output Parser",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
     }
   },
-  "active": true,
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "versionId": "28d84ba3-114e-4f23-a7de-beed7082fc5f",
+  "pinData": {},
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "a2b5c8ab06fa554533c54e6d7404fd79a79c73e31a6cef240d61cec252a9945d"
-  },
-  "id": "gOCDflfZFfg5yyWo",
-  "tags": []
+  }
 }
