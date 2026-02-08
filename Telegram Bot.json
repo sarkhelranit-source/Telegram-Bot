@@ -325,7 +325,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return items.map(item => {\n  // Extract only the message and replace the entire output with just the message string\n  if (item.json && item.json.output && item.json.output.message) {\n    item.json.output = item.json.output.message.replace(/[`*_]/g, '');\n  }\n  return item;\n});\n"
+        "jsCode": "return items.map(item => {\n  let output = item.json.output;\n  let message = '';\n\n  // Handle case where output is a string (stringified JSON)\n  if (typeof output === 'string') {\n    try {\n      const parsed = JSON.parse(output);\n      message = parsed.message || output;\n    } catch (e) {\n      // If parsing fails, check if it looks like our JSON format\n      const match = output.match(/\"message\"\\s*:\\s*\"([^\"]*)\"/); \n      if (match) {\n        message = match[1];\n      } else {\n        message = output;\n      }\n    }\n  }\n  // Handle case where output is an object\n  else if (output && typeof output === 'object') {\n    message = output.message || JSON.stringify(output);\n  }\n  // Fallback\n  else {\n    message = String(output || '');\n  }\n\n  // Clean markdown formatting\n  message = message.replace(/[`*_]/g, '');\n\n  // Replace the entire output with just the clean message string\n  item.json.output = message;\n\n  return item;\n});\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
